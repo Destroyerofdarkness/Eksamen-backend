@@ -19,11 +19,14 @@ userSchema.pre("save",async function(){
 
 userSchema.statics.signIn = async(info)=>{
     const user = await User.findOne({username:info.username});
+    if(user){
     if(await argon2.verify(user.passwd, info.passwd)){
         return user._id;
     }else{
         throw Error("Feil Passord..");
     }
+}
+throw Error("Oppgitt bruker eksisterer ikke..");
 }
 
 
