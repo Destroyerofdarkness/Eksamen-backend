@@ -36,4 +36,21 @@ const sign_up_user = async(req,res)=>{
     }
 }
 
-module.exports = {sign_in_user, sign_up_user};
+const authenticate_and_check_user = async(req,res)=>{
+    const token = req.params.token;
+    try {
+        jwt.verify(token, process.env.secret, async(err, decodedToken)=>{
+            if(err){
+                res.status(400).json({user:null,success:false, message:"Couldn't authenticate user because of invalid signature!!"});
+            }else{
+                console.log(decodedToken);
+                const user = await User.findById(decodedToken.id);
+                res.status(200).json({user, success:true, message: "Succesfully authenticated the user via the decoded token"});
+            }
+        })
+    } catch (err) {
+        res.status(400).json({err,success:false, message: "Couldn't authenticate or check user because of errors!!"})
+    }
+}
+
+module.exports = {sign_in_user, sign_up_user, authenticate_and_check_user};
