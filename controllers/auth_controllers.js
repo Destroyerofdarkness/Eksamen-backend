@@ -1,6 +1,6 @@
 const { handlerUserErrors } = require("../handlers/modelErrorsHandlers");
 const User = require("../models/User");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 const signJWT = (id)=>{
     return jwt.sign({id}, process.env.secret, {

@@ -6,6 +6,10 @@ const cors = require("cors");
 
 require("dotenv").config();
 
+//Middleware
+
+const authorize = require("./middleware/authorization");
+
 //Routes
 
 const auth_routes = require("./routes/auth_routes");
@@ -22,6 +26,10 @@ app.use(cors({
 }));
 
 require("./handlers/mongoDbConnect")();
+
+//Used middleware
+
+app.use(authorize);
 
 //Used Routes
 
