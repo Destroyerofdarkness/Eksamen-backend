@@ -36,4 +36,26 @@ const handlerUserErrors = (err)=>{
     return errors;
 }
 
-module.exports = {handlerUserErrors};
+
+const handleIssueErrors = (err)=>{
+    console.log("ERROR MESSAGE: ",err.message, "ERROR CODE: ",err.code);
+
+    const errors = {title:"", description:""};
+
+    if(err.code == 11000){
+        errors.title = "Tittelen er allerede i bruk og hendelsen er registrert.."
+        return errors;
+    }
+
+    Object.values(err.errors).forEach(({properties})=>{
+        errors[properties.path] = properties.message;
+    })
+
+    return errors;
+}
+
+
+module.exports = {
+    handlerUserErrors,
+    handleIssueErrors
+};
