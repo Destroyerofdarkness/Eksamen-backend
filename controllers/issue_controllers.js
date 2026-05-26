@@ -14,6 +14,17 @@ const publish_issue = async (req,res)=>{
     }
 }
 
+const send_out_all_issues = async(req,res)=>{
+    try {
+        const Issues = await Issue.find();
+        res.status(200).json({Issues,success:true, message: "Succesfully got all the Issues from the database"});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({err,success:false, message:"Couldn't get all the issues because of Internal Server Error!!" })
+    }
+}
+
 module.exports = {
-    publish_issue
+    publish_issue,
+    send_out_all_issues
 }
