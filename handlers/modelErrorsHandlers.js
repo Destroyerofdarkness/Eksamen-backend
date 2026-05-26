@@ -4,9 +4,12 @@
 const handlerUserErrors = (err)=>{
     console.log("Error: ", err, "Code: ", err.code);
 
-    const errors = {username: "", passwd: ""}
+    const errors = {username: "", passwd: "", authorization:""}
 
-
+    if(err.message == "Nøkkelen er ikke aktiv.."){
+        errors.authorization = "Nøkkelen er ikke aktiv..";
+        return errors;
+    }
     if(err.code === 11000){
         errors.username = "Brukernavnet er allerede i bruk..";
         return errors;
