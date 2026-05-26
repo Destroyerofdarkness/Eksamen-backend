@@ -12,6 +12,8 @@ const authorize = require("./middleware/authorization");
 
 //Routes
 
+const issue_routes = require("./routes/issue_routes");
+
 const auth_routes = require("./routes/auth_routes");
 
 //Config
@@ -34,6 +36,8 @@ app.use(authorize);
 //Used Routes
 
 app.use("/auth", auth_routes);
+
+app.use("/issue", issue_routes);
 
 
 //Server Start
