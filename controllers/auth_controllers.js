@@ -13,7 +13,6 @@ const signJWT = (id)=>{
 const sign_in_user = async(req,res)=>{
     const {BODY} = req.body
     try {
-        console.log(BODY)
         const userID = await User.signIn(BODY);
         const token = signJWT(userID);
         res.status(200).json({token, success:true, message: "Succesfully signed in the User!!"});
