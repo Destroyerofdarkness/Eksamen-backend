@@ -15,13 +15,17 @@ const issueSchema = new Schema({
         type:String,
         default: "Ubestemt"
     },
+    loggText:{
+        type: String,
+        default: "",
+    },
     status:{
         type:String,
         default:"Åpen"
     },
-    connection:{
+    authorized:{
         type:String,
-        required:true
+        default:"Ingen"
     }
 })
 
@@ -32,6 +36,14 @@ issueSchema.statics.publish = async(info)=>{
         connection:info.connection
     })
     await newIssue.save();
+    return;
+}
+
+issueSchema.statics.updateLogg = async(info)=>{
+    const updated = await Issue.findByIdAndUpdate(info.id, {
+        loggText:info.loggText
+    })
+    updated.save()
     return;
 }
 

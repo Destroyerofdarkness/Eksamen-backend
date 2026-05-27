@@ -24,7 +24,20 @@ const send_out_all_issues = async(req,res)=>{
     }
 }
 
+
+const update_logg_issue = async(req,res)=>{
+    const {BODY} = req.body
+    try {
+        console.log(BODY)
+        await Issue.updateLogg(BODY);
+        res.status(200).json({success:true, message: "Succesfully updated the logg for the issue!!"});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({err,success:false, message:"Couldn't get all the issues because of Internal Server Error!!" })
+    }
+}
 module.exports = {
     publish_issue,
-    send_out_all_issues
+    send_out_all_issues,
+    update_logg_issue
 }
