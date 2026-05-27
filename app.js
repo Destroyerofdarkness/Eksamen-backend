@@ -12,6 +12,8 @@ const authorize = require("./middleware/authorization");
 
 //Routes
 
+const worker_routes = require("./routes/worker_routes");
+
 const issue_routes = require("./routes/issue_routes");
 
 const auth_routes = require("./routes/auth_routes");
@@ -38,6 +40,8 @@ app.use(authorize);
 app.use("/auth", auth_routes);
 
 app.use("/issue", issue_routes);
+
+app.use("/worker", worker_routes);
 
 
 //Server Start
