@@ -52,6 +52,14 @@ issueSchema.statics.updateCriticality = async (info)=>{
     })
     return;
 }
+
+
+issueSchema.statics.updateAuthorized = async(info)=>{
+    await Issue.findByIdAndUpdate(info.id,{
+        authorized:info.worker
+    })
+    return;
+}
 const Issue = model("Issues",issueSchema);
 
 module.exports = Issue;
