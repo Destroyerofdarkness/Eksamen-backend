@@ -25,6 +25,19 @@ const send_out_all_issues = async(req,res)=>{
 }
 
 
+const send_categorize_critical_issues = async(req,res)=>{
+   const critical = req.params.critical
+    try {
+        const Issues = await Issue.find({
+            criticality:critical
+        });
+        res.status(200).json({Issues,success:true, message: "Succesfully got all the Issues from the database"});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({err,success:false, message:"Couldn't get all the categorized issues because of Internal Server Error!!" })
+    }
+}
+
 const update_logg_issue = async(req,res)=>{
     const {BODY} = req.body
     try {
@@ -53,5 +66,6 @@ module.exports = {
     publish_issue,
     send_out_all_issues,
     update_logg_issue,
-    update_criticalLevel_issue
+    update_criticalLevel_issue,
+    send_categorize_critical_issues
 }

@@ -33,7 +33,6 @@ issueSchema.statics.publish = async(info)=>{
     const newIssue = new Issue({
         title:info.title,
         description:info.description,
-        connection:info.connection
     })
     await newIssue.save();
     return;
