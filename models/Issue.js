@@ -40,13 +40,19 @@ issueSchema.statics.publish = async(info)=>{
 }
 
 issueSchema.statics.updateLogg = async(info)=>{
-    const updated = await Issue.findByIdAndUpdate(info.id, {
+    await Issue.findByIdAndUpdate(info.id, {
         loggText:info.loggText
     })
-    updated.save()
     return;
 }
 
+
+issueSchema.statics.updateCriticality = async (info)=>{
+    await Issue.findByIdAndUpdate(info.issueId, {
+        criticality:info.criticality
+    })
+    return;
+}
 const Issue = model("Issues",issueSchema);
 
 module.exports = Issue;
