@@ -60,6 +60,15 @@ issueSchema.statics.updateAuthorized = async(info)=>{
     })
     return;
 }
+
+issueSchema.statics.closeIssue = async(info)=>{
+    await Issue.findByIdAndUpdate(info.issueId,{
+        criticality:"Låst",
+        status:"Lukket"
+    })
+    return;
+}
+
 const Issue = model("Issues",issueSchema);
 
 module.exports = Issue;

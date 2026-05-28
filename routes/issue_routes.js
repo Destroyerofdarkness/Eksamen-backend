@@ -13,5 +13,7 @@ router.put("/update/criticality", controller.update_criticalLevel_issue);
 
 router.put("/update/authorized", controller.update_authorized_issue);
 
+router.put("/close", controller.close_issue_req);
+
 
 module.exports = router;

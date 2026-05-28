@@ -90,7 +90,7 @@ const update_logg_issue = async (req, res) => {
         err,
         success: false,
         message:
-          "Couldn't get all the issues because of Internal Server Error!!",
+          "Couldn't update the issue logg because of Internal Server Error!!",
       });
   }
 };
@@ -114,7 +114,7 @@ const update_criticalLevel_issue = async (req, res) => {
         err,
         success: false,
         message:
-          "Couldn't get all the issues because of Internal Server Error!!",
+          "Couldn't update the issue criticalLevel because of Internal Server Error!!",
       });
   }
 };
@@ -138,10 +138,33 @@ const update_authorized_issue = async (req, res) => {
         err,
         success: false,
         message:
-          "Couldn't get all the issues because of Internal Server Error!!",
+          "Couldn't update the issue because of Internal Server Error!!",
       });
   }
 };
+
+const close_issue_req = async(req,res)=>{
+  const {BODY} = req.body
+  try {
+    await Issue.closeIssue(BODY);
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: "Succesfully updated the critical level for the issue!!",
+      });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({
+        err,
+        success: false,
+        message:
+          "Couldn't close the issue because of Internal Server Error!!",
+      });
+  }
+}
 
 module.exports = {
   publish_issue,
@@ -149,5 +172,6 @@ module.exports = {
   update_logg_issue,
   update_criticalLevel_issue,
   send_categorize_critical_issues,
-  update_authorized_issue
+  update_authorized_issue,
+  close_issue_req
 };
