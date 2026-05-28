@@ -15,5 +15,7 @@ router.put("/update/authorized", controller.update_authorized_issue);
 
 router.put("/close", controller.close_issue_req);
 
+router.put("/open", controller.open_issue_req);
+
 
 module.exports = router;

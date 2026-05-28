@@ -69,6 +69,14 @@ issueSchema.statics.closeIssue = async(info)=>{
     return;
 }
 
+issueSchema.statics.openIssue = async(info)=>{
+    await Issue.findByIdAndUpdate(info.issueId,{
+        criticality:"Ubestemt",
+        status:"Åpen"
+    })
+    return;
+}
+
 const Issue = model("Issues",issueSchema);
 
 module.exports = Issue;

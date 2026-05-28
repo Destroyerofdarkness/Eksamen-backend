@@ -170,6 +170,30 @@ const close_issue_req = async(req,res)=>{
   }
 }
 
+const open_issue_req = async(req,res)=>{
+  const {BODY} = req.body;
+  try {
+     await Issue.openIssue(BODY);
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: "Succesfully updated the critical level for the issue!!",
+      });
+  } catch (err) {
+    console.log(err);
+     res
+      .status(500)
+      .json({
+        err,
+        success: false,
+        message:
+          "Couldn't open the issue because of Internal Server Error!!",
+      });
+
+  }
+}
+
 module.exports = {
   publish_issue,
   send_out_all_issues,
@@ -177,5 +201,6 @@ module.exports = {
   update_criticalLevel_issue,
   send_categorize_critical_issues,
   update_authorized_issue,
-  close_issue_req
+  close_issue_req,
+  open_issue_req
 };
