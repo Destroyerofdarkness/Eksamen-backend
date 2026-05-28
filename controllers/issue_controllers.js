@@ -24,7 +24,11 @@ const publish_issue = async (req, res) => {
 
 const send_out_all_issues = async (req, res) => {
   try {
-    const Issues = await Issue.find();
+    const Issues = await Issue.find(
+      {
+        status: {$ne: "Lukket"}
+      }
+    );
     res
       .status(200)
       .json({
