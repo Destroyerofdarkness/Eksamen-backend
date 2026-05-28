@@ -41,7 +41,7 @@ throw Error("Oppgitt bruker eksisterer ikke..");
 userSchema.statics.signUp = async(info)=>{
     if(info.passwd === info.conPass){ 
     const hash = crypto.createHash("sha256").update(info.authKey).digest("hex");
-    const foundKey = await authKey.findOneAndDelete({key:hash});
+    const foundKey = await authKey.findOne({key:hash});
     if(foundKey){
     const newUser = new User({
         username:info.username,
@@ -49,6 +49,7 @@ userSchema.statics.signUp = async(info)=>{
         authorization:foundKey.authority
     });
     await newUser.save();
+    await authKey.findOneAndDelete({key:hash});
     return newUser._id;
     }else{
         throw Error("Nøkkelen er ikke aktiv..")
